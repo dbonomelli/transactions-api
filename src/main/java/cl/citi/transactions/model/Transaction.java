@@ -10,6 +10,7 @@ public class Transaction {
     private Double amount;
     private Double amountAfterTax;
     private String taxRuleId;
+    private Double tax;
     private Date transactionDate;
     private String details;
 }

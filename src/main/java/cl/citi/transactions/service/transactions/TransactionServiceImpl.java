@@ -33,6 +33,7 @@ public class TransactionServiceImpl implements TransactionService{
         try{
             int newId = Integer.parseInt(transactions.get(transactions.size() -1 ).getId()) + 1;
             transaction.setId(String.valueOf(newId));
+            transaction.setTax(getTaxValue(transaction));
             transaction.setAmountAfterTax(calculateTax(transaction));
             transaction.setTransactionDate(new Date());
             transactions.add(transaction);
@@ -42,6 +43,26 @@ public class TransactionServiceImpl implements TransactionService{
             throw ex;
         }
         return response;
+    }
+
+    private Double getTaxValue(Transaction transaction){
+        double tax = 0;
+        try{
+            if(transaction != null){
+                String taxRuleId = transaction.getTaxRuleId();
+                Tax taxObject = taxService.getTaxById(taxRuleId);
+                if(taxObject != null){
+                    tax = taxObject.getRate() * transaction.getAmount();
+                }else{
+                    throw new BusinessException("404", "Tax Rule Id not found");
+                }
+            }
+        }catch (Exception ex){
+            throw ex;
+        }
+
+
+        return tax;
     }
 
     /**
@@ -114,6 +135,7 @@ public class TransactionServiceImpl implements TransactionService{
         transaction.setId("1");
         transaction.setDetails("Payment to Citi");
         transaction.setAmount(16.25);
+        transaction.setTax(1.625);
         transaction.setTransactionDate(new Date());
         transaction.setTaxRuleId("1");
         transaction.setAmountAfterTax(17.875);
