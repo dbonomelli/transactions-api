@@ -12,6 +12,13 @@ import java.util.List;
 public class TaxServiceImpl implements TaxService{
 
     private final List<Tax> taxes = createDummyTaxes();
+
+    /**
+     * Creates a new Tax Rule
+     *
+     * @param tax
+     * @return Generic response if correctly passed information
+     */
     @Override
     public GenericResponse submitTax(Tax tax) {
         GenericResponse response = new GenericResponse();
@@ -27,6 +34,10 @@ public class TaxServiceImpl implements TaxService{
         return response;
     }
 
+    /**
+     * Gets all the tax rules created
+     * @return a list of tax rules
+     */
     @Override
     public List<Tax> getAllTaxes() {
         try{
@@ -39,6 +50,11 @@ public class TaxServiceImpl implements TaxService{
         return taxes;
     }
 
+    /**
+     * Gets a tax rule using its ID from the array
+     * @param id
+     * @return a Tax Class containing the information
+     */
     @Override
     public Tax getTaxById(String id) {
         Tax foundTax;
@@ -50,6 +66,11 @@ public class TaxServiceImpl implements TaxService{
         return foundTax;
     }
 
+    /**
+     * Creates dummy data so the array doesn't start empty
+     *
+     * @return a list of dummy Tax Rules
+     */
     private List<Tax> createDummyTaxes(){
         List<Tax> dummyTaxes = new ArrayList<>();
         Tax tax = new Tax();

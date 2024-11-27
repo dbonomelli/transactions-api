@@ -20,6 +20,13 @@ public class TransactionServiceImpl implements TransactionService{
 
     private final List<Transaction> transactions = createDummyTransactions();
 
+    /**
+     * Submits a transaction into the array provided above, checks last id and adds one
+     * sets the new value of the amount after taxes and the current date
+     *
+     * @param transaction
+     * @return Generic response if saved correctly
+     */
     @Override
     public GenericResponse submitTransaction(Transaction transaction) {
         GenericResponse response = new GenericResponse();
@@ -37,6 +44,11 @@ public class TransactionServiceImpl implements TransactionService{
         return response;
     }
 
+    /**
+     * Gets all the transactions that are currently saved in the array
+     *
+     * @return List of transactions
+     */
     @Override
     public List<Transaction> getAllTransactions() {
         try{
@@ -49,6 +61,12 @@ public class TransactionServiceImpl implements TransactionService{
         return transactions;
     }
 
+    /**
+     * Finds a transaction using via its ID
+     *
+     * @param id
+     * @return the given transaction if found, else returns an exception
+     */
     @Override
     public Transaction getTransactionById(String id) {
         Transaction transaction;
@@ -59,6 +77,13 @@ public class TransactionServiceImpl implements TransactionService{
         }
         return transaction;
     }
+
+    /**
+     * Checks the variables, if not empty, gets the Tax Rule and the amount from the transaction
+     *
+     * @param transaction
+     * @return a Double with an updated value of the amount
+     */
 
     private Double calculateTax(Transaction transaction){
         double newAmount = 0;
@@ -78,6 +103,11 @@ public class TransactionServiceImpl implements TransactionService{
         return newAmount;
     }
 
+    /**
+     * Creates dummy data for the array, so it doesn't start empty
+     *
+     * @return List of transactions created in the dummy data
+     */
     private List<Transaction> createDummyTransactions(){
         List<Transaction> dummyTransactions = new ArrayList<>();
         Transaction transaction = new Transaction();

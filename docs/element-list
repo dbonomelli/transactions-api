@@ -1,0 +1,8 @@
+cl.citi.transactions
+cl.citi.transactions.controller
+cl.citi.transactions.controller.filter
+cl.citi.transactions.exceptions
+cl.citi.transactions.model
+cl.citi.transactions.model.dto.response
+cl.citi.transactions.service.taxes
+cl.citi.transactions.service.transactions
