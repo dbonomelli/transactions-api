@@ -45,6 +45,12 @@ public class TransactionServiceImpl implements TransactionService{
         return response;
     }
 
+    /**
+     * Gets only what the tax value should be depending on the amount and the rate of the tax
+     *
+     * @param transaction
+     * @return double with the amount
+     */
     private Double getTaxValue(Transaction transaction){
         double tax = 0;
         try{
